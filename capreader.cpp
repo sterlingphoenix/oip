@@ -20,6 +20,9 @@
 
 #include <arpa/inet.h>
 
+#include <ostream>
+#include <iostream>
+
 #define TVT(t) ((t).tv_sec + (t).tv_usec / 1000000.0)
 
 
@@ -34,7 +37,11 @@ capreader::capreader(const char* file)
 		start = TVT(header->ts);
 	}
 	if (result != 1)
-		throw "Unable to open the file";
+		try {
+			throw "Unable to open the file";
+		} catch (const char* msg) {
+			std::cerr << "Caught exception: " << msg << std::endl;
+		}
 }
 
 capreader::~capreader()

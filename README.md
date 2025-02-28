@@ -1,4 +1,4 @@
-OIP
+OIP - NOW WITH UBUNTU 24.04 SUPPORT!
 ---
 
 OrganicIP (OIP) visualizer uses libpcap and Simple DirectMedia Layer (SDL) to visualize IP traffic between endpoints.
@@ -6,28 +6,9 @@ OrganicIP (OIP) visualizer uses libpcap and Simple DirectMedia Layer (SDL) to vi
 Supported Distributions
 -----------------------
 
-Any linux distribution with the necessary [dependencies](#dependencies) is supported with [installation instructions](#installation-from-source). Pre-built packages are available for the following operating systems are supported: 
+Any linux distribution with the necessary [dependencies](#dependencies) is supported with [installation instructions](#installation-from-source). Pre-built packages are available for the following operating systems are _theoretically_ supported. The pre-fork version supported debian sid and bullseye, and Ubuntu 18.04, 20.04, and 21.10. 
 
-- Debian
-   - sid
-   - bullseye
-- Ubuntu 
-   - impish
-   - focal
-   - bionic
-
-Distribution
-------------
-
-While mirrors are available at following location for older distributions they longer actively maintained:
-
-http://mirror.usu.edu/usu-security/dists/
-
-The repository keyring is located at the following location but has expired:
-
-https://raw.githubusercontent.com/USU-Security/oip/master/usu_archive_keyring.gpg
-
-We encourage you to compile oip for the latest operating system distributions e.g., Ubuntu Noble. 
+This version has been tested on Ubuntu 24.04. 
 
 Colors
 ------
@@ -45,9 +26,9 @@ Running
 
 Steps to run the server/client for a live capture
 
- - create /etc/oip.conf and at a minimum set a secret
+ - create /etc/oip.conf and, at a minimum, set a secret
  - start the server: `oipd <interface>`
- - start the client: `oip -f <pcap_filter> -s <server>`
+ - start the client: `oip [-f <pcap_filter>] -s <server>`
 
 The client also supports reading from a pcap file
 
@@ -71,27 +52,13 @@ Keyboard keys:
  - p to pause and play the capture
  - <ESC> to disconnect
 
-Installation from Repository
-----------------------------
-
-For older Ubuntu distributions, to install OIP from existing repositories execute the following commands:
-
-```
-curl -L https://raw.githubusercontent.com/USU-Security/oip/master/usu_archive_keyring.gpg | sudo apt-key add -
-sudo add-apt-repository 'deb [arch=amd64] http://mirror.usu.edu/usu-security/ focal-security-unstable main'
-sudo apt-get install oip
-cp /usr/share/doc/oip/oip.conf-example /etc/oip.conf
-```
-
-Configuring the firewall and placing the relevant interface into promiscuous mode is encouraged.
-
 Dependencies
 ------------
 
 The following are the dependent packages needed for OIP to compile: 
 
  ```
- apt-get install libcrypto++-dev libsdl-image1.2-dev libpcap-dev libsdl1.2-dev libfreetype6-dev g++ make libfontconfig1-dev autoconf
+ apt-get install build-essential git libcrypto++-dev libsdl-image1.2-dev libpcap-dev libsdl1.2-dev libfreetype6-dev g++ make libfontconfig1-dev autoconf
  ```
 
 Installation from Source
@@ -99,7 +66,7 @@ Installation from Source
 
 To compile OIP from source execute the following commands:
 ```
-git clone https://github.com/USU-Security/oip.git
+git clone https://github.com/sterlingphoenix/oip.git
 cd oip
 ./autogen.sh
 ./configure
@@ -107,7 +74,7 @@ make
 make install
 ```
 
-If you have any dependency error, just install them.
+If you have any dependency missing that is not mentioned above, you'll have to track it down and install it.
 
 Authors
 -------
@@ -115,3 +82,4 @@ Authors
 - Rian Shelley (Utah State University)
 - Maintained by Eldon Koyle (Utah State University)
 - Additional features added by Sebastian Garcia (eldraco@gmail.com) and Vojtech Uhlir (wojtyla@agents.felk.cvut.cz) (Czech Technical University)
+- This fork by sterlingphoenix was made to add Ubuntu 24.04 support. 
