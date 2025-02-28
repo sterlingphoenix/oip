@@ -18,6 +18,9 @@
 */
 #include "text.h"
 #include <SDL/SDL_image.h>
+#include <ostream>
+#include <iostream>
+
 
 _text text(DATADIR "6x13.png", 6, 13);
 
@@ -27,7 +30,11 @@ _text::_text(const char* font, int w, int h)
 	height = h;
 	width = w;
 	if (!(t = IMG_Load(font)))
-		throw SDL_GetError();
+		try {
+			throw SDL_GetError();
+		} catch (const char* msg) {
+			std::cerr << "Caught exception: " << msg << std::endl;
+		}
 	SDL_SetAlpha(t, SDL_SRCALPHA, 255);
 	txt[0xffffffff] = t;
 }
